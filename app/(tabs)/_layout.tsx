@@ -5,7 +5,18 @@ import React from "react";
 
 const TabLayout = () => {
   return (
-    <Tabs screenOptions={{ tabBarActiveTintColor: "blue" }}>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: "blue",
+        headerStyle: {
+          backgroundColor: "#0e86d4",
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
@@ -20,7 +31,7 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="cards"
         options={{
           title: "Cards",
           tabBarIcon: ({ color }) => (
