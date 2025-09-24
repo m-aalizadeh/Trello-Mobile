@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import BoardScreen from "../../components/Board";
@@ -45,12 +46,10 @@ const mockBoards: Board[] = [
 ];
 
 const Index: React.FC<Props> = ({ navigation }) => {
+  const router = useRouter();
   const [boards, setBoards] = useState<Board[]>(mockBoards);
   const handleBoardPress = (board: Board) => {
-    // navigation.navigate("Boards", {
-    //   boardId: board.id,
-    //   boardTitle: board.title,
-    // });
+    router.replace(`/board/${board.id}`);
   };
 
   return (

@@ -1,9 +1,14 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { Tabs } from "expo-router";
+import { Tabs, useRouter } from "expo-router";
 import React from "react";
+import { TouchableOpacity } from "react-native";
 
 const TabLayout = () => {
+  const router = useRouter();
+  const goHome = () => {
+    router.push("/"); // Navigate to home (adds to history)
+  };
   return (
     <Tabs
       screenOptions={{
@@ -15,6 +20,11 @@ const TabLayout = () => {
         headerTitleStyle: {
           fontWeight: "bold",
         },
+        headerLeft: () => (
+          <TouchableOpacity onPress={goHome}>
+            <FontAwesome name="home" size={24} color="white" />
+          </TouchableOpacity>
+        ),
       }}
     >
       <Tabs.Screen
@@ -31,7 +41,7 @@ const TabLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="cards"
+        name="board/[id]"
         options={{
           title: "Cards",
           tabBarIcon: ({ color }) => (

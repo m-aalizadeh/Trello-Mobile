@@ -1,9 +1,8 @@
 import Card from "@/components/Card";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, Text, TouchableOpacity, View } from "react-native";
-import { RootStackParamList, Todo } from "../../types";
-type Props = NativeStackScreenProps<RootStackParamList, "todos">;
+import { Todo } from "../../../types";
 
 const mockTasks: Todo[] = [
   {
@@ -27,9 +26,9 @@ const mockTasks: Todo[] = [
     createdAt: new Date(),
   },
 ];
-const Cards: React.FC<Props> = ({ route, navigation }) => {
-  // const { boardTitle } = route.params;
-  const boardTitle = "My Board";
+
+const BoardDetails: React.FC = () => {
+  const { id } = useLocalSearchParams();
   const [tasks, setTasks] = useState<Todo[]>(mockTasks);
 
   const handleToggleTask = (taskId: string) => {
@@ -45,7 +44,7 @@ const Cards: React.FC<Props> = ({ route, navigation }) => {
   return (
     <View className="flex-1 bg-gray-50">
       <View className="bg-white px-6 py-4 border-b border-gray-200">
-        <Text className="text-2xl font-bold text-gray-800">{boardTitle}</Text>
+        <Text className="text-2xl font-bold text-gray-800">Board ID: {id}</Text>
         <View className="flex-row items-center mt-1">
           <Text className="text-gray-600">
             {completedTasks} of {totalTasks} tasks completed
@@ -82,15 +81,4 @@ const Cards: React.FC<Props> = ({ route, navigation }) => {
   );
 };
 
-export default Cards;
-//       <TouchableOpacity
-//         className="absolute bottom-6 right-6 bg-blue-500 w-14 h-14 rounded-full items-center justify-center shadow-lg"
-//         onPress={() => {
-//           /* Add new task functionality */
-//         }}
-//       >
-//         <Text className="text-white text-2xl">+</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// };
+export default BoardDetails;
